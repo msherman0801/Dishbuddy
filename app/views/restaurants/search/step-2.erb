@@ -1,17 +1,32 @@
-<div class="progress" style="height: 20px;">
-    <div class="progress-bar" role="progressbar" style="width: <%=@progress%>%;"></div>
+<div class="row">
+    <div class="col-md-10">
+        <div class="progress" style="height: 20px; margin-top: 8px;">
+            <div class="progress-bar" role="progressbar" style="width: <%=@progress%>%;"></div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-light" onclick="goBack()">Go Back</button>
+    </div>
 </div>
 
 <% if @establishments %>
-<form method="POST" action="/restaurants/search/step-2">
-    <br />
-    <h2>View or save a restaurant.</h2>
+
+<div style="margin-top: 30px">
+<h2 class="text-center mb-3">Let's talk eatery's. What are you in the mood for?</h2>
+<div class="row">
     <% @establishments.each do |i| %>
-        <input type="radio" name="establishment_id" value=<%=i["establishment"]["id"]%> placeholder="Establishment Type">
-        <%= i["establishment"]["name"] %></ br>
-        </input>
+        <form class="col-sm-3 mb-3" method="POST" action="/restaurants/search/step-2">
+            <div class="card text-dark mb-3" style="max-width: 18rem;">
+            <input type="hidden" name="establishment_id" value=<%=i["establishment"]["id"]%>></input>
+                <div class="card-body">
+                    <h5 class="card-title"><%= i["establishment"]["name"] %></h5>
+                </div>
+                <button class="btn btn-light" style="width: 100%;" type="submit">Select</button>
+            </div>
+        </form>
     <% end %>
-    <br />
-    <button type="submit">Next</button>
+</div>
+<br />
+</div>
 </form>
 <% end %>

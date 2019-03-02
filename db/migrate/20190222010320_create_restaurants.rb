@@ -7,8 +7,13 @@ class CreateRestaurants < ActiveRecord::Migration
       t.text :address
       t.string :url
       t.string :photos_url
-      t.string :user_rating
-      t.string :user_votes
+      t.string :aggregate_rating
+      t.string :votes
+      t.text :locality
+      t.text :latitude
+      t.text :longitude
+      t.string :rating_color
+      t.text :phone_numbers
     end
   end
 end

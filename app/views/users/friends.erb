@@ -15,7 +15,7 @@
     </ul> 
 
     <ul class="list-group">
-        <li class="list-group-item text-muted"><a href="/users/friendlist">Following (<%=@self.friends.count%>)</a><i class="fa fa-dashboard fa-1x"></i></li>
+        <li class="list-group-item text-muted"><a href="/users/friends">Following (<%=@self.friends.count%>)</a><i class="fa fa-dashboard fa-1x"></i></li>
         <% @self.friends.each do |i| %>
         <li class="list-group-item text-right"><span class="pull-left"></span><a href="/users/<%=i.id%>"><%=i.username%></a></li>
         <% end %>

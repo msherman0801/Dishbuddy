@@ -1,34 +1,59 @@
-<form method="POST" action='/restaurants/search/show'>
 
-    <input type="hidden" name="res[res_id]" value=<%=@restaurant["R"]["res_id"]%>>
-
-    <input type="hidden" name="res[name]" value="<%=@restaurant["name"]%>">
-        <h3><%= @restaurant["name"] %></h3>
-        <br />
-
-    <input type="hidden" name="res[city_name]" value=<%=@restaurant["location"]["city"]%>>
-        <h4><%= @restaurant["location"]["city"] %></h4>
-        <br />
-
-    <input type="hidden" name="res[address]" value=<%=@restaurant["location"]["address"]%>>
-        <h5><%= @restaurant["location"]["address"] %></h5>
-        <br />    
-
-    <input type="hidden" name="res[url]" value=<%=@restaurant["url"]%>>
-        <h5><%= @restaurant["url"] %></h5>
-        <br />    
-
-    <input type="hidden" name="res[user_rating]" value=<%=@restaurant["user_rating"]["aggregate_rating"]%>>
-        <h5><%= @restaurant["user_rating"]["aggregate_rating"] %></h5>
-        <br />  
+<div class="d-flex justify-content-center">
+    <h5>Dakota loves your choice.</h5>
+    <button class="btn mb-3 btn-sm btn-light" style="margin-left: 10px;" onclick="goBack()">Go Back</button>
+</div>
+<hr width="20%">
+<div class="row d-flex justify-content-center rounded">
+    <div class="col-md-10 rounded p-3">
+        <form method="POST" action='/restaurants/search/show'>
+        <!--INPUTS-->
+            <input type="hidden" name="res[res_id]" value=<%=@restaurant["R"]["res_id"]%>>
+            <input type="hidden" name="res[name]" value="<%=@restaurant["name"]%>">
+            <input type="hidden" name="res[city_name]" value=<%=@restaurant["location"]["city"]%>>
+            <input type="hidden" name="res[address]" value=<%=@restaurant["location"]["address"]%>>
+            <input type="hidden" name="res[url]" value=<%=@restaurant["url"]%>>
+            <input type="hidden" name="res[aggregate_rating]" value=<%=@restaurant["user_rating"]["aggregate_rating"]%>>
+            <input type="hidden" name="res[votes]" value=<%=@restaurant["user_rating"]["votes"]%>>
+            <input type="hidden" name="res[photos_url]" value=<%=@restaurant["photos_url"]%>>
+            <!--NEW STUFF-->
+            <input type="hidden" name="res[locality]" value=<%=@restaurant["location"]["locality"]%>>
+            <input type="hidden" name="res[latitude]" value=<%=@restaurant["location"]["latitude"]%>>
+            <input type="hidden" name="res[longitude]" value=<%=@restaurant["location"]["longitude"]%>>
+            <input type="hidden" name="res[votes]" value=<%=@restaurant["user_rating"]["rating_color"]%>>
+            <input type="hidden" name="res[votes]" value=<%=@restaurant["phone_numbers"]%>>
+            <button class="btn mb-3 <%=@button[0]%>" type="submit"><%=@button[1]%></button>
+            <div class="row">
+                <div class="col-md-4">
+                    <ul class="list-group">
+                        <li class="list-group-item text-left">For the foodie nerds:<i class="fa fa-dashboard fa-1x"></i></li>
+                        <li class="list-group-item text-left"><span class="pull-left"><strong>Bueno?:</strong><strong style="color: #<%=@restaurant["user_rating"]["rating_color"]%>"> <%=@restaurant["user_rating"]["rating_text"]%></strong></span></li>
+                        <li class="list-group-item text-left"><span class="pull-left"><strong>Rating: <%=@restaurant["user_rating"]["aggregate_rating"]%>/5</strong></span></li>
+                        <li class="list-group-item text-left"><span class="pull-left"><strong>Votes: <%=@restaurant["user_rating"]["votes"]%></strong></span></li>
+                        <li class="list-group-item text-left"><span class="pull-left"><strong>Neighborhood: <%=@restaurant["location"]["locality"]%></strong></span></li>
+                        <li class="list-group-item text-left"><span class="pull-left"><strong>Longitude: <%=@restaurant["location"]["longitude"]%></strong></span></li>
+                        <li class="list-group-item text-left"><span class="pull-left"><strong>Latitude: <%=@restaurant["location"]["latitude"]%></strong></span></li>
+                    </ul> 
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h2><span class="badge badge-primary"><%= @restaurant["location"]["city"] %></span></h2>
+                            <a style="text-decoration: none;" href="<%= @restaurant["url"]%>"><h6><span class="badge badge-secondary">Go to Zomato</span></h6></a>
+                        </div>
+                        <div class="col-md-9"">
+                            <h2 style="padding-left: 10px;"><%= @restaurant["name"] %></h2> 
+                            <h5 style="padding-left: 10px;"><%= @restaurant["location"]["address"] %></h5>
+                        </div>
+                    </div>
+                    <hr>
+                    <h3 style="margin-top: 2em;">Most recent reviews:</h3>
+                    <% @reviews.each do |i| %>
+                    
+                    <% end %>
         
-    <input type="hidden" name="res[user_votes]" value=<%=@restaurant["user_rating"]["user_votes"]%>>
-        <h5><%= @restaurant["user_rating"]["user_votes"] %></h5>
-        <br /> 
-        
-    <input type="hidden" name="res[photos_url]" value=<%=@restaurant["photos_url"]%>>
-        <h5><%= @restaurant["photos_url"] %></h5>
-        <br /> 
-
-    <button type="submit">Save to my collection!</button>
-</form>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>  

@@ -16,7 +16,7 @@
     </ul> 
 
     <ul class="list-group">
-        <li class="list-group-item text-muted"><a href="/users/friendlist">Following (<%=@friend.friends.count%>)</a><i class="fa fa-dashboard fa-1x"></i></li>
+        <li class="list-group-item text-muted">Following (<%=@friend.friends.count%>)<i class="fa fa-dashboard fa-1x"></i></li>
         <% @friend.friends.each do |i| %>
         <li class="list-group-item text-right"><span class="pull-left"></span><a href="/users/<%=i.id%>"><%=i.username%></a></li>
         <% end %>
@@ -69,16 +69,23 @@
                     </div>
 
             <table id="example" class="table table-striped table-bordered" style="width:100%">
-                <%@friend.restaurants.each do |i| %>
                 <thead>
                     <tr>
-                        <th><%= i.name %></th>
-                        <th><%= i.city %></th>
-                        <th><%= i.name %></th>
-                        <th><%= i.user_rating %></th>
-                        <th><%= i.user_votes %></th>
+                        <th>Restaurant Name</th>
+                        <th>City</th>
+                        <th>Rating</th>
+                        <th>Votes</th>
                     </tr>
                 </thead>
+                <%@friend.restaurants.each do |i| %>
+                    <tbody>
+                        <tr>
+                            <td><%= i.name %></td>
+                            <td><%= i.city_name %></td>
+                            <td><%= i.aggregate_rating %>/5</td>
+                            <td><%= i.votes %></td>
+                        </tr>
+                    </tbody>
                 <%end%>
             </table>
 

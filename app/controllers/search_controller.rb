@@ -36,23 +36,29 @@ class SearchController < ApplicationController
     end
 
     get '/restaurants/search/show' do
+        res = Restaurant.all.find{|i| i.res_id == params["res"]["res_id"]}
+        user = Helpers.user(session)
+        @reviews = []
         @progress = "100"
         @restaurant = Api.fetch(Search.linkify(params["res"]))
+        if !user.restaurants.include?(res)
+            @button = ["btn-success","Add to my DishList"]
+        else
+            @button = ["btn-danger","Remove from my DishList"]
+        end
         erb :'/restaurants/search/show'
     end
 
     post '/restaurants/search/show' do
-        binding.pry
-        user = User.find(session[:user_id])
+        user = Helpers.user(session)
         res = Restaurant.all.find{|i| i.res_id == params["res"]["res_id"]}
         if res && !user.restaurants.include?(res)
             user.restaurants << res
         elsif !res && !user.restaurants.include?(res)
             user.restaurants << Restaurant.create(params[:res])
-        else
-            redirect '/users/profile'
+        elsif res && user.restaurants.include?(res)
+            user.restaurants.delete(res)
         end
-        binding.pry
         redirect '/users/profile'
     end
     # get '/restaurants/search/results' do

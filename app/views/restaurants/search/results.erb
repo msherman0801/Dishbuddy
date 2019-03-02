@@ -1,20 +1,33 @@
-<div class="progress" style="height: 20px;">
-    <div class="progress-bar" role="progressbar" style="width: <%=@progress%>%;"></div>
+<div class="row">
+    <div class="col-md-10">
+        <div class="progress" style="height: 20px; margin-top: 8px;">
+            <div class="progress-bar" role="progressbar" style="width: <%=@progress%>%;"></div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-light" onclick="goBack()">Go Back</button>
+    </div>
 </div>
 
+<br /><br />
 
-<% @restaurants["restaurants"].map do |i| %>
-    <form method="GET" action='/restaurants/search/show'>
-    <input type="hidden" name="res[res_id]" value=<%=i["restaurant"]["id"]%>>
-        <h3><%= i["restaurant"]["name"] %></h3>
+<h2 class="text-center mb-3">What city do you want to search in?</h2>
+    <hr<
+    <div style="margin-top: 30px">
+        <div class="row">
+        <% @restaurants["restaurants"].map do |i| %>
+            <form class="col-sm-3 mb-3" method="GET" action="/restaurants/search/show">
+                <div class="card text-dark mb-3" style="max-width: 18rem;">
+                <input type="hidden" name="res[res_id]" value=<%=i["restaurant"]["id"]%>>
+                    <div class="card-header"><%= i["restaurant"]["user_rating"]["aggregate_rating"] %>/5</div>
+                    <div class="card-body">
+                        <h5 class="card-title"><%= i["restaurant"]["name"] %></h5>
+                        <p class="card-text"><%= i["restaurant"]["location"]["address"] %></p>
+                    </div>
+                    <button class="btn btn-light" style="width: 100%;" type="submit">Select</button>
+                </div>
+            </form>
+            <% end %>
+        </div>
         <br />
-
-        <h4><%= i["restaurant"]["location"]["city"] %></h4>
-        <br />
-
-        <h5><%= i["restaurant"]["location"]["address"] %></h5>
-        <br /> 
-
-    <button type="submit">Save</button>
-    </form>
-<% end %>
+    </div>

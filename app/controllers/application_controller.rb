@@ -65,6 +65,4 @@ class ApplicationController < Sinatra::Base
     end
   end
 
-
-
 end

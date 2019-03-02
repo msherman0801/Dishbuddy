@@ -1,0 +1,37 @@
+
+
+
+<div class="progress" style="height: 20px;">
+    <div class="progress-bar" role="progressbar" style="width: <%=@progress%>%;"></div>
+</div>
+
+<div class="d-flex justify-content-center">
+    <form class="text-center" method="POST" action="/restaurants/search/step-1">
+        <br />
+        <h2>Type in a United States City or Town.</h2>
+        <hr>
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-lg">city</span>
+                </div>
+                <input type="text" class="form-control" name="cities" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+            </div>
+        <br />
+        <button class="btn-primary btn-lg" type="submit">Next</button>
+    </form>
+    </div>
+    
+    <% if @cities %>
+        <form method="POST" action="/restaurants/search/step-1">
+            <br />
+            <h2>What city do you want to search in?</h2>
+            <% @cities.each do |i| %>
+                <input type="radio" name="city" value=<%=i["id"]%> placeholder="City Name">
+                <%= i["name"] %></ br>
+                <%= i["country_name"] %></ br>
+                </input>
+            <% end %>
+            <br />
+            <button type="submit">Next</button>
+        </form>
+    <% end %>

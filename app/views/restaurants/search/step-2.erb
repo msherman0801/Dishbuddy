@@ -1,0 +1,17 @@
+<div class="progress" style="height: 20px;">
+    <div class="progress-bar" role="progressbar" style="width: <%=@progress%>%;"></div>
+</div>
+
+<% if @establishments %>
+<form method="POST" action="/restaurants/search/step-2">
+    <br />
+    <h2>View or save a restaurant.</h2>
+    <% @establishments.each do |i| %>
+        <input type="radio" name="establishment_id" value=<%=i["establishment"]["id"]%> placeholder="Establishment Type">
+        <%= i["establishment"]["name"] %></ br>
+        </input>
+    <% end %>
+    <br />
+    <button type="submit">Next</button>
+</form>
+<% end %>

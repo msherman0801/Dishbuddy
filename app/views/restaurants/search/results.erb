@@ -1,0 +1,20 @@
+<div class="progress" style="height: 20px;">
+    <div class="progress-bar" role="progressbar" style="width: <%=@progress%>%;"></div>
+</div>
+
+
+<% @restaurants["restaurants"].map do |i| %>
+    <form method="GET" action='/restaurants/search/show'>
+    <input type="hidden" name="res[res_id]" value=<%=i["restaurant"]["id"]%>>
+        <h3><%= i["restaurant"]["name"] %></h3>
+        <br />
+
+        <h4><%= i["restaurant"]["location"]["city"] %></h4>
+        <br />
+
+        <h5><%= i["restaurant"]["location"]["address"] %></h5>
+        <br /> 
+
+    <button type="submit">Save</button>
+    </form>
+<% end %>

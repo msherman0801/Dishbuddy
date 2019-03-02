@@ -1,0 +1,14 @@
+<h1>TEST HEADER</h1>
+
+<a href='/users'><button type="submit">My Profile</button></a>
+<form method="POST" action="/logout">
+    <button type="submit">Logout</button>
+</form>
+
+<h2>There are <%=@users.all.count%> users!</h2>
+<h3>Here are the most recent ones
+<% @users.each do |i| %>
+
+    <a href="/users/<%=i.id%>"><h3><%=i.username%></h3></a>
+<%end%>
+

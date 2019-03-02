@@ -1,0 +1,48 @@
+<div class="container bootstrap snippet">
+<div class="row">
+    <div class="col-sm-3"><!--left col-->
+            
+
+    <div class="text-center">
+    <img src="/images/avatar.png" class="avatar img-circle img-thumbnail" alt="avatar">
+    <h6 class="text-dark">Profile picture feature currently not available.</h6>
+    </div></hr><br>
+        
+    <ul class="list-group">
+        <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Restaurants</strong></span> <%=@self.restaurants.count%></li>
+        <li class="list-group-item text-right"><span class="pull-left"><strong>Reviews</strong></span> 0</li>
+    </ul> 
+
+    <ul class="list-group">
+        <li class="list-group-item text-muted"><a href="/users/friendlist">Following (<%=@self.friends.count%>)</a><i class="fa fa-dashboard fa-1x"></i></li>
+        <% @self.friends.each do |i| %>
+        <li class="list-group-item text-right"><span class="pull-left"></span><a href="/users/<%=i.id%>"><%=i.username%></a></li>
+        <% end %>
+    </ul>
+        
+    </div><!--/col-3-->
+    <div class="col-sm-9">
+        <h1 style="display: inline-block;" class="text-dark"><%=@self.username%></h1>
+            <hr>
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th class="text-secondary">Username</th>
+                        <th class="text-secondary">Restaurants</th>
+                        <th class="text-secondary">Following</th>
+                    </tr>
+                </thead>
+                <%@self.friends.each do |i| %>
+                <thead>
+                    <tr>
+                        <th><%= i.username %></th>
+                        <th><%= i.restaurants.count %></th>
+                        <th><%= i.friends.count %></th>
+                    </tr>
+                </thead>
+                <%end%>
+            </table>
+
+    </div><!--/col-9-->
+</div><!--/row-->

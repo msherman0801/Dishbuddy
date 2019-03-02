@@ -1,0 +1,44 @@
+
+
+
+<div class="progress" style="height: 20px;">
+    <div class="progress-bar" role="progressbar" style="width: <%=@progress%>%;"></div>
+</div>
+
+<div class="d-flex justify-content-center mb-3">
+    <form class="text-center" method="POST" action="/restaurants/search/step-1">
+        <br />
+        <h2>Enter a city or town name.</h2>
+        <hr>
+            <div class="input-group input-group-lg">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-lg">city</span>
+                </div>
+                <input type="text" class="form-control" name="cities" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+            </div>
+        <br />
+        <button class="btn-primary btn-lg" type="submit">Next</button>
+    </form>
+    </div>
+    
+    <% if @cities %>
+        <br />
+        <div style="margin-top: 30px">
+            <h2 class="text-center mb-3">What city do you want to search in?</h2>
+            <div class="row">
+                <% @cities.each do |i| %>
+                    <form class="col-sm-3 mb-3" method="POST" action="/restaurants/search/step-1">
+                        <div class="card text-dark mb-3" style="max-width: 18rem;">
+                        <input type="hidden" name="city" value=<%=i["id"]%> placeholder="City Name"></input>
+                            <div class="card-header"><%= i["country_name"] %></div>
+                            <div class="card-body">
+                                <h5 class="card-title"><%= i["name"] %></h5>
+                            </div>
+                            <button class="btn btn-light" style="width: 100%;" type="submit">Select</button>
+                        </div>
+                    </form>
+                <% end %>
+            </div>
+            <br />
+        </div>
+    <% end %>

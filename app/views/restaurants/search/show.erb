@@ -1,0 +1,34 @@
+<form method="POST" action='/restaurants/search/show'>
+
+    <input type="hidden" name="res[res_id]" value=<%=@restaurant["R"]["res_id"]%>>
+
+    <input type="hidden" name="res[name]" value="<%=@restaurant["name"]%>">
+        <h3><%= @restaurant["name"] %></h3>
+        <br />
+
+    <input type="hidden" name="res[city_name]" value=<%=@restaurant["location"]["city"]%>>
+        <h4><%= @restaurant["location"]["city"] %></h4>
+        <br />
+
+    <input type="hidden" name="res[address]" value=<%=@restaurant["location"]["address"]%>>
+        <h5><%= @restaurant["location"]["address"] %></h5>
+        <br />    
+
+    <input type="hidden" name="res[url]" value=<%=@restaurant["url"]%>>
+        <h5><%= @restaurant["url"] %></h5>
+        <br />    
+
+    <input type="hidden" name="res[user_rating]" value=<%=@restaurant["user_rating"]["aggregate_rating"]%>>
+        <h5><%= @restaurant["user_rating"]["aggregate_rating"] %></h5>
+        <br />  
+        
+    <input type="hidden" name="res[user_votes]" value=<%=@restaurant["user_rating"]["user_votes"]%>>
+        <h5><%= @restaurant["user_rating"]["user_votes"] %></h5>
+        <br /> 
+        
+    <input type="hidden" name="res[photos_url]" value=<%=@restaurant["photos_url"]%>>
+        <h5><%= @restaurant["photos_url"] %></h5>
+        <br /> 
+
+    <button type="submit">Save to my collection!</button>
+</form>

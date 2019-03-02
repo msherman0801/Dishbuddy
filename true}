@@ -1,0 +1,50 @@
+
+An error occurred while loading ./include.
+Failure/Error: __send__(method, file)
+
+LoadError:
+  cannot load such file -- /Users/msherman/Documents/Dev/Portfolio/dishbuddy/include
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/configuration.rb:2034:in `load'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/configuration.rb:2034:in `load_file_handling_errors'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/configuration.rb:1560:in `block in load_spec_files'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/configuration.rb:1558:in `each'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/configuration.rb:1558:in `load_spec_files'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/runner.rb:98:in `setup'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/runner.rb:86:in `run'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/runner.rb:71:in `run'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/runner.rb:45:in `invoke'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/exe/rspec:4:in `<top (required)>'
+# /usr/local/bin/rspec:23:in `load'
+# /usr/local/bin/rspec:23:in `<main>'
+# 
+#   Showing full backtrace because every line was filtered out.
+#   See docs for RSpec::Configuration#backtrace_exclusion_patterns and
+#   RSpec::Configuration#backtrace_inclusion_patterns for more information.
+
+An error occurred while loading ./{:focus=.
+Failure/Error: __send__(method, file)
+
+LoadError:
+  cannot load such file -- /Users/msherman/Documents/Dev/Portfolio/dishbuddy/{:focus=
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/configuration.rb:2034:in `load'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/configuration.rb:2034:in `load_file_handling_errors'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/configuration.rb:1560:in `block in load_spec_files'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/configuration.rb:1558:in `each'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/configuration.rb:1558:in `load_spec_files'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/runner.rb:98:in `setup'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/runner.rb:86:in `run'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/runner.rb:71:in `run'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/lib/rspec/core/runner.rb:45:in `invoke'
+# /usr/local/lib/ruby/gems/2.5.0/gems/rspec-core-3.8.0/exe/rspec:4:in `<top (required)>'
+# /usr/local/bin/rspec:23:in `load'
+# /usr/local/bin/rspec:23:in `<main>'
+# 
+#   Showing full backtrace because every line was filtered out.
+#   See docs for RSpec::Configuration#backtrace_exclusion_patterns and
+#   RSpec::Configuration#backtrace_inclusion_patterns for more information.
+No examples found.
+
+
+Finished in 0.00017 seconds (files took 0.15206 seconds to load)
+0 examples, 0 failures, 2 errors occurred outside of examples
+

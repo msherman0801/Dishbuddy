@@ -12,7 +12,7 @@ gem 'bcrypt'
 gem "tux"
 
 group :development do
-  gem 'sqlite3', '<1.4'
+  gem 'sqlite3', '~> 1.3.6'
   gem 'shotgun'
   gem 'tux'
   gem 'pry'

@@ -55,14 +55,14 @@ class ApplicationController < Sinatra::Base
     erb :login
   end
 
-  get "/main" do
+  get "/home" do
     protected!
  
     @restaurants = Restaurant.all
     @friendships = Friendship.all
     @self = Helpers.user(session)
     @users = User.all
-    erb :'/users/profile'
+    erb :index
   end
 
   helpers do

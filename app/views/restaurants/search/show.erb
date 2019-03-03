@@ -20,8 +20,8 @@
             <input type="hidden" name="res[locality]" value=<%=@restaurant["location"]["locality"]%>>
             <input type="hidden" name="res[latitude]" value=<%=@restaurant["location"]["latitude"]%>>
             <input type="hidden" name="res[longitude]" value=<%=@restaurant["location"]["longitude"]%>>
-            <input type="hidden" name="res[votes]" value=<%=@restaurant["user_rating"]["rating_color"]%>>
-            <input type="hidden" name="res[votes]" value=<%=@restaurant["phone_numbers"]%>>
+            <input type="hidden" name="res[rating_color]" value=<%=@restaurant["user_rating"]["rating_color"]%>>
+            <input type="hidden" name="res[phone_numbers]" value=<%=@restaurant["phone_numbers"]%>>
             <button class="btn mb-3 <%=@button[0]%>" type="submit"><%=@button[1]%></button>
             <div class="row">
                 <div class="col-md-4">
@@ -37,17 +37,17 @@
                 </div>
                 <div class="col-md-8">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <h2><span class="badge badge-primary"><%= @restaurant["location"]["city"] %></span></h2>
                             <a style="text-decoration: none;" href="<%= @restaurant["url"]%>"><h6><span class="badge badge-secondary">Go to Zomato</span></h6></a>
                         </div>
-                        <div class="col-md-9"">
+                        <div class="col-md-8"">
                             <h2 style="padding-left: 10px;"><%= @restaurant["name"] %></h2> 
                             <h5 style="padding-left: 10px;"><%= @restaurant["location"]["address"] %></h5>
                         </div>
                     </div>
                     <hr>
-                    <h3 style="margin-top: 2em;">Most recent reviews:</h3>
+                    <h3 style="margin-top: 2em;">Most recent DishBuddy reviews:</h3>
                     <% @reviews.each do |i| %>
                     
                     <% end %>

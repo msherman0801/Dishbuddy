@@ -3,9 +3,11 @@
 <!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta http-equiv="X-UA-Compatible"/>
     <title>Dishbuddy</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/stylesheets/new.css" />
@@ -16,6 +18,8 @@
       }
     </script>
   </head>
+
+
   <body class="bg-light">
   <%if Helpers.is_logged_in?(session)%>
     <nav style="background-color: #1c1c1c;" class="navbar navbar-expand-lg navbar-light">
@@ -29,13 +33,19 @@
           <a class="nav-item nav-link text-light" href="/users/profile">My Profile</a>
           <a class="nav-item nav-link text-light" href="/users/friends">My Friends</a>
           <a class="nav-item nav-link text-light" href="/search">Search</a>
+          <a class="nav-item nav-link text-light mr-auto" href="/logout">Logout</a>
         </div> 
         <div class="navbar-nav">
-          <a class="nav-item nav-link text-light mr-auto" href="/logout">Logout</a>
+          <form method="POST" action="/restaurants/search/step-1" class="form-inline my-2 my-lg-0">
+              <input required="true" class="form-control mr-sm-2" name="cities" type="search" placeholder="Search by city">
+              <button class="btn btn-sm btn-outline-primary my-2 my-sm-0" type="submit">Quick Search</button>
+          </form>
         </div>
       </div>
     </nav>
     <%end%>
+
+
     <div class="container">
         <br /><br />
         <%= yield %>
@@ -44,6 +54,7 @@
         <small>&copy; 2019 <strong>Dishbuddy</strong></small>
       </footer>
     </div>
+
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <!--[if lt IE 7]>

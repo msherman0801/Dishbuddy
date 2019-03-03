@@ -1,14 +1,43 @@
-<h1>TEST HEADER</h1>
-
-<a href='/users'><button type="submit">My Profile</button></a>
-<form method="POST" action="/logout">
-    <button type="submit">Logout</button>
-</form>
-
-<h2>There are <%=@users.all.count%> users!</h2>
-<h3>Here are the most recent ones
-<% @users.each do |i| %>
-
-    <a href="/users/<%=i.id%>"><h3><%=i.username%></h3></a>
-<%end%>
-
+<div class="row">
+    <div class="col-md-6">
+        <h1>Good to see you, <strong class="text-primary"><%=@self.username%></strong>!</h1>
+        <h6>Here is a quick run down of what's been happening since you've been gone.</h6>
+        <hr>
+        <div class="row">
+            <div class="col-md-4">
+                <h4>Users:</h4>
+                <p><%= @users.count %></p>
+            </div>
+            <div class="col-md-4">
+                <h4>Restaurants Saved:</h4>
+                <p><%= @restaurants.count %></p>
+            </div>
+            <div class="col-md-4">
+                <h4>Buddies followed:</h4>
+                <p><%= @friendships.count %></p>
+            </div>
+        </div>
+        <br /><br />
+        <h6>To the right, you can see the last few restaurants that were saved by buddies around the globe! Does one look interesting? Click on it to check it out!</h6>
+    </div>
+    <div class="col-md-6">
+        <div class="list-group">
+            <a href="/users/<%=@users.last.id%>" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <p class="mb-1">Welcome to our newest user, <%= @users.last.username %></p> 
+                </div>
+            </a>
+            <% @restaurants[@restaurants.all.count-3..-1].each do |i| %>
+                <a href="/restaurants/search/show?res[res_id]=<%=i.res_id%>" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1"><%= i.name %></h5>
+                        <small><%= i.city_name %></small>
+                    </div>
+                    <p class="mb-1"><%=i.aggregate_rating%>/5 | <%=i.votes%> votes</p>
+                    <small>Donec id elit non mi porta.</small>
+                </a>
+            <% end %>
+        </div>
+    </div>
+</div>
+<hr style="margin-top: 3em;">

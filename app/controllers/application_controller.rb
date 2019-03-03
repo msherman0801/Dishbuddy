@@ -36,7 +36,6 @@ class ApplicationController < Sinatra::Base
   end
 
   post "/login" do
-    binding.pry
     user = User.find_by(username: params[:username]).authenticate(params[:password])
     if user
       session[:user_id] = user.id
@@ -47,7 +46,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/logout" do
-    session[:user_id] == 0
+    session.clear
     redirect "/login"
   end
 
@@ -57,11 +56,23 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/home" do
-    if Helpers.is_logged_in?(session)
-      @users = User.all
-      erb :home
-    else
+    protected!
+ 
+    @restaurants = Restaurant.all
+    @friendships = Friendship.all
+    @self = Helpers.user(session)
+    @users = User.all
+    erb :home
+  end
+
+  helpers do
+    def protected!
+      return if authorized?
       redirect '/login'
+    end
+  
+    def authorized?
+     true if !session[:user_id].nil? && session[:user_id] > 0
     end
   end
 

@@ -1,7 +1,8 @@
 class RestaurantController < ApplicationController
 
     post '/restaurant/index' do
-        binding.pry
+        protected!
+ 
     end
 
 end

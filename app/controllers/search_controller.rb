@@ -1,16 +1,21 @@
 class SearchController < ApplicationController
-
     @@item = nil
 
     get '/search' do
+        protected!
+ 
         redirect '/restaurants/search'
     end
 
     get '/restaurants/search' do
+        protected!
+ 
         erb :'/restaurants/search/step-1'   
     end
 
     post '/restaurants/search/step-1' do
+        protected!
+ 
         @progress = "0"
         if params["cities"] 
             @progress = "20"
@@ -23,12 +28,16 @@ class SearchController < ApplicationController
     end
 
     get '/restaurants/search/step-2' do
+        protected!
+ 
         @progress = "40"
         @establishments = Api.fetch(Search.linkify({"city"=>session["city"]}))["establishments"]
         erb :'/restaurants/search/step-2'
     end
 
     post '/restaurants/search/step-2' do
+        protected!
+ 
         @progress = "80"
         params["entity_id"] = session["city"]
         @restaurants = Api.fetch(Search.linkify(params))
@@ -36,6 +45,8 @@ class SearchController < ApplicationController
     end
 
     get '/restaurants/search/show' do
+        protected!
+ 
         res = Restaurant.all.find{|i| i.res_id == params["res"]["res_id"]}
         user = Helpers.user(session)
         @reviews = []
@@ -50,16 +61,19 @@ class SearchController < ApplicationController
     end
 
     post '/restaurants/search/show' do
+        protected!
+ 
         user = Helpers.user(session)
         res = Restaurant.all.find{|i| i.res_id == params["res"]["res_id"]}
         if res && !user.restaurants.include?(res)
             user.restaurants << res
         elsif !res && !user.restaurants.include?(res)
-            user.restaurants << Restaurant.create(params[:res])
+            res = Restaurant.create(params[:res])
+            user.restaurants << res
         elsif res && user.restaurants.include?(res)
             user.restaurants.delete(res)
         end
-        redirect '/users/profile'
+        redirect "/restaurants/search/show?res[res_id]=#{res.res_id}"
     end
     # get '/restaurants/search/results' do
     #     binding.pry

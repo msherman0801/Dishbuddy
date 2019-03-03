@@ -62,7 +62,7 @@ class ApplicationController < Sinatra::Base
     @friendships = Friendship.all
     @self = Helpers.user(session)
     @users = User.all
-    erb :home
+    erb :'/users/profile'
   end
 
   helpers do

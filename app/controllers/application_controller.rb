@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
   end
   
   get "/" do
-    redirect '/main'
+    redirect '/home'
   end
 
   get '/register' do

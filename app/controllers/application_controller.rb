@@ -15,7 +15,7 @@ class ApplicationController < Sinatra::Base
   end
   
   get "/" do
-    redirect '/home'
+    redirect '/main'
   end
 
   get '/register' do
@@ -55,7 +55,7 @@ class ApplicationController < Sinatra::Base
     erb :login
   end
 
-  get "/home" do
+  get "/main" do
     protected!
  
     @restaurants = Restaurant.all

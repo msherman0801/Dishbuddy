@@ -47,6 +47,7 @@ class SearchController < ApplicationController
     get '/restaurants/search/show' do
         protected!
 
+        @error = true if params[:failure] == true
         @res = Restaurant.all.find{|i| i.res_id == params["res"]["res_id"]}
         user = Helpers.user(session)
         @reviews = UserRestaurant.all.map{|i| i if i.restaurant_id == @res.id && !i.review.nil?}.compact
@@ -67,7 +68,6 @@ class SearchController < ApplicationController
             user_restaurant.review = params[:review]
             user_restaurant.save
         else
-            @error = true
             redirect "/restaurants/search/show?res[res_id]=#{res.res_id}&failure=true"
         end
         redirect "/restaurants/search/show?res[res_id]=#{res.res_id}"

@@ -63,7 +63,7 @@ class SearchController < ApplicationController
 
     post '/restaurants/search/review' do 
         res = Restaurant.find(params[:res_id])
-        user_restaurant = UserRestaurant.find_by("user_id" => session[:user_id], "restaurant_id" => res.id)
+        user_restaurant = UserRestaurant.find_by("user_id" => session[:user_id], "restaurant_id" => (res.id if !res.id.nil?))
         if !user_restaurant.nil?
             user_restaurant.review = params[:review]
             user_restaurant.save

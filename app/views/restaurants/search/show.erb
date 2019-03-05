@@ -7,7 +7,7 @@
 <div class="row d-flex justify-content-center rounded">
     <div class="col-md-10 rounded p-3">
         <form method="POST" action='/restaurants/search/show'>
-        <!--INPUTS-->
+            <!--INPUTS-->
             <input type="hidden" name="res[res_id]" value=<%=@restaurant["R"]["res_id"]%>>
             <input type="hidden" name="res[name]" value="<%=@restaurant["name"]%>">
             <input type="hidden" name="res[city_name]" value=<%=@restaurant["location"]["city"]%>>
@@ -16,44 +16,57 @@
             <input type="hidden" name="res[aggregate_rating]" value=<%=@restaurant["user_rating"]["aggregate_rating"]%>>
             <input type="hidden" name="res[votes]" value=<%=@restaurant["user_rating"]["votes"]%>>
             <input type="hidden" name="res[photos_url]" value=<%=@restaurant["photos_url"]%>>
-            <!--NEW STUFF-->
             <input type="hidden" name="res[locality]" value=<%=@restaurant["location"]["locality"]%>>
             <input type="hidden" name="res[latitude]" value=<%=@restaurant["location"]["latitude"]%>>
             <input type="hidden" name="res[longitude]" value=<%=@restaurant["location"]["longitude"]%>>
             <input type="hidden" name="res[rating_color]" value=<%=@restaurant["user_rating"]["rating_color"]%>>
             <input type="hidden" name="res[phone_numbers]" value=<%=@restaurant["phone_numbers"]%>>
             <button class="btn mb-3 <%=@button[0]%>" type="submit"><%=@button[1]%></button>
-            <div class="row">
-                <div class="col-md-4">
-                    <ul class="list-group">
-                        <li class="list-group-item text-left">For the foodie nerds:<i class="fa fa-dashboard fa-1x"></i></li>
-                        <li class="list-group-item text-left"><span class="pull-left"><strong>Bueno?:</strong><strong style="color: #<%=@restaurant["user_rating"]["rating_color"]%>"> <%=@restaurant["user_rating"]["rating_text"]%></strong></span></li>
-                        <li class="list-group-item text-left"><span class="pull-left"><strong>Rating: <%=@restaurant["user_rating"]["aggregate_rating"]%>/5</strong></span></li>
-                        <li class="list-group-item text-left"><span class="pull-left"><strong>Votes: <%=@restaurant["user_rating"]["votes"]%></strong></span></li>
-                        <li class="list-group-item text-left"><span class="pull-left"><strong>Neighborhood: <%=@restaurant["location"]["locality"]%></strong></span></li>
-                        <li class="list-group-item text-left"><span class="pull-left"><strong>Longitude: <%=@restaurant["location"]["longitude"]%></strong></span></li>
-                        <li class="list-group-item text-left"><span class="pull-left"><strong>Latitude: <%=@restaurant["location"]["latitude"]%></strong></span></li>
-                    </ul> 
-                </div>
-                <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <h2><span class="badge badge-primary"><%= @restaurant["location"]["city"] %></span></h2>
-                            <a style="text-decoration: none;" href="<%= @restaurant["url"]%>"><h6><span class="badge badge-secondary">Go to Zomato</span></h6></a>
-                        </div>
-                        <div class="col-md-8"">
-                            <h2 style="padding-left: 10px;"><%= @restaurant["name"] %></h2> 
-                            <h5 style="padding-left: 10px;"><%= @restaurant["location"]["address"] %></h5>
-                        </div>
+        </form>
+
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-group">
+                    <li class="list-group-item text-left">For the foodie nerds:<i class="fa fa-dashboard fa-1x"></i></li>
+                    <li class="list-group-item text-left"><span class="pull-left"><strong>Bueno?:</strong><strong style="color: #<%=@restaurant["user_rating"]["rating_color"]%>"> <%=@restaurant["user_rating"]["rating_text"]%></strong></span></li>
+                    <li class="list-group-item text-left"><span class="pull-left"><strong>Rating: <%=@restaurant["user_rating"]["aggregate_rating"]%>/5</strong></span></li>
+                    <li class="list-group-item text-left"><span class="pull-left"><strong>Votes: <%=@restaurant["user_rating"]["votes"]%></strong></span></li>
+                    <li class="list-group-item text-left"><span class="pull-left"><strong>Neighborhood: <%=@restaurant["location"]["locality"]%></strong></span></li>
+                    <li class="list-group-item text-left"><span class="pull-left"><strong>Longitude: <%=@restaurant["location"]["longitude"]%></strong></span></li>
+                    <li class="list-group-item text-left"><span class="pull-left"><strong>Latitude: <%=@restaurant["location"]["latitude"]%></strong></span></li>
+                </ul> 
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h2><span class="badge badge-primary"><%= @restaurant["location"]["city"] %></span></h2>
+                        <a style="text-decoration: none;" href="<%= @restaurant["url"]%>"><h6><span class="badge badge-secondary">Go to Zomato</span></h6></a>
                     </div>
-                    <hr>
-                    <h3 style="margin-top: 2em;">Most recent DishBuddy reviews:</h3>
+                    <div class="col-md-8"">
+                        <h2 style="padding-left: 10px;"><%= @restaurant["name"] %></h2> 
+                        <h5 style="padding-left: 10px;"><%= @restaurant["location"]["address"] %></h5>
+                    </div>
+                </div>
+                <hr>
+                <form method="POST" action="/restaurants/search/review">
+                    <input type="hidden" name="res_id" value=<%=@res.id if !@res.id.nil?%>>
+                    <div class="form-group">
+                        <textarea required="true" class="form-control" id="comment" rows="5" name="review" placeholder="Write your review here!"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+                <h3 class="mt-3" style="margin-top: 2em;">Most recent DishBuddy reviews:</h3>
+                <div class="row">
                     <% @reviews.each do |i| %>
-                    
+                        <div class="col-md-3">
+                            <h5><%= User.find(i.user_id).username %> says:<h5>
+                        </div>
+                        <div class="col-md-9">
+                            <p><%= i.review %> </p>
+                        </div>
                     <% end %>
-        
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>  

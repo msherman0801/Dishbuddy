@@ -46,18 +46,30 @@ class SearchController < ApplicationController
 
     get '/restaurants/search/show' do
         protected!
- 
-        res = Restaurant.all.find{|i| i.res_id == params["res"]["res_id"]}
+
+        @res = Restaurant.all.find{|i| i.res_id == params["res"]["res_id"]}
         user = Helpers.user(session)
-        @reviews = []
+        @reviews = UserRestaurant.all.map{|i| i if i.restaurant_id == @res.id && !i.review.nil?}.compact
         @progress = "100"
         @restaurant = Api.fetch(Search.linkify(params["res"]))
-        if !user.restaurants.include?(res)
+        if !user.restaurants.include?(@res)
             @button = ["btn-success","Add to my DishList"]
         else
             @button = ["btn-danger","Remove from my DishList"]
         end
         erb :'/restaurants/search/show'
+    end
+
+    post '/restaurants/search/review' do 
+        res = Restaurant.find(params[:res_id])
+        user_restaurant = UserRestaurant.find_by("user_id" => session[:user_id], "restaurant_id" => res.id)
+        if !user_restaurant.nil?
+            user_restaurant.review = params[:review]
+            user_restaurant.save
+        else
+            redirect "/restaurants/search/show?res[res_id]=#{res.res_id}&failure=true"
+        end
+        redirect "/restaurants/search/show?res[res_id]=#{res.res_id}"
     end
 
     post '/restaurants/search/show' do

@@ -5,8 +5,8 @@ class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
-    enable :sessions
-    set :session_secret, ENV.fetch('SESSION_SECRET') 
+    enable :sessions unless test?
+    set :session_secret, "mS@IMD@<2)D<M!@)I1Q(U!@9"
   end
 
   not_found do
@@ -24,7 +24,12 @@ class ApplicationController < Sinatra::Base
 
   post "/register" do
     session[:user_id] = 0
-    user = User.create(params)
+    if !User.all.find_by("username" => params[:username])
+      user = User.create(params)
+    else
+      @failed_auth = true
+      return erb :register
+    end
     session[:user_id] = user.id
     redirect "/home"
   end
@@ -62,7 +67,7 @@ class ApplicationController < Sinatra::Base
     @friendships = Friendship.all
     @self = Helpers.user(session)
     @users = User.all
-    erb :index
+    erb :home
   end
 
   helpers do

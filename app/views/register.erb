@@ -1,4 +1,5 @@
 <div class="container col-lg-7 bg-light rounded">
+
     <center><img class="rounded" src="/images/logo.png"></center><br />
         <div class="d-flex justify-content-center">
             <div class="col-md-8">
@@ -6,6 +7,10 @@
                     <div class="form-group">
                         <input required="true" class="form-control" type=text name="username" placeholder="Username">
                     </div>
+
+                    <% if @failed_auth == true %>
+                        <h6 class="text-danger mb-3">The username you chose has already been taken.</h6>
+                    <% end %>
 
                     <div class="form-group">
                         <input required="true" type="email" class="form-control" name="email" placeholder="Email">

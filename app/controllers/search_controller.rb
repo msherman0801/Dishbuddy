@@ -67,6 +67,7 @@ class SearchController < ApplicationController
             user_restaurant.review = params[:review]
             user_restaurant.save
         else
+            @error = true
             redirect "/restaurants/search/show?res[res_id]=#{res.res_id}&failure=true"
         end
         redirect "/restaurants/search/show?res[res_id]=#{res.res_id}"

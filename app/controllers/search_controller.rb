@@ -47,7 +47,7 @@ class SearchController < ApplicationController
     get '/restaurants/search/show' do
         protected!
 
-        @error = true if params[:failure] == true
+        @error = true if params[:failure] == "true"
         @res = Restaurant.all.find{|i| i.res_id == params["res"]["res_id"]}
         user = Helpers.user(session)
         @reviews = UserRestaurant.all.map{|i| i if i.restaurant_id == @res.id && !i.review.nil?}.compact
@@ -63,7 +63,7 @@ class SearchController < ApplicationController
 
     post '/restaurants/search/review' do 
         res = Restaurant.find(params[:res_id])
-        user_restaurant = UserRestaurant.find_by("user_id" => session[:user_id], "restaurant_id" => (res.id if !res.id.nil?))
+        user_restaurant = UserRestaurant.find_by("user_id" => session[:user_id], "restaurant_id" => res.id)
         if !user_restaurant.nil?
             user_restaurant.review = params[:review]
             user_restaurant.save

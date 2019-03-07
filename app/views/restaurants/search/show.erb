@@ -57,7 +57,7 @@
             </form>
             <h3 class="mt-3" style="margin-top: 2em;">Most recent DishBuddy reviews:</h3>
             <% if @error %>
-                <h6 class="text-danger mt-3 mb-3">No buddies have saved this retaurant to their DishList yet! A user must save this restaurant before a review can be written.</h6>
+                <h6 class="text-danger mt-3 mb-3">You cannot write a review for a restaurant that you haven't saved to your DishList!</h6>
             <% end %>
             <div class="row">
                 <% @reviews.each do |i| %>

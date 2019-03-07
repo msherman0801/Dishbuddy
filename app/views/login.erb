@@ -1,11 +1,11 @@
-<% if @failed_auth == true %>
-    <h3>Your username or password was incorrect.</h3>
-<% end %>
 <br />
 <div class="container col-lg-7 bg-light rounded">
     <center><img class="rounded" src="/images/logo.png"></center><br />
         <div class="d-flex justify-content-center">
             <div class="col-md-8">
+                <% if @invalid == true %>
+                    <h6 class="text-danger mb-3">Your username or password was incorrect.</h6>
+                <% end %>
                 <form method="POST" action="/login">
                     <div class="form-group">
                         <input required="true" class="form-control" type=text id="exampleInputEmail1" name="username" placeholder="Username">

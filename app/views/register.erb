@@ -8,7 +8,7 @@
                         <input required="true" class="form-control" type=text name="username" placeholder="Username">
                     </div>
 
-                    <% if @failed_auth == true %>
+                    <% if @invalid == true %>
                         <h6 class="text-danger mb-3">The username you chose has already been taken.</h6>
                     <% end %>
 

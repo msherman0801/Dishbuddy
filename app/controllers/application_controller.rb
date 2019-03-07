@@ -27,7 +27,7 @@ class ApplicationController < Sinatra::Base
     if !User.all.find_by("username" => params[:username])
       user = User.create(params)
     else
-      @failed_auth = true
+      @invalid = true
       return erb :register
     end
     session[:user_id] = user.id
@@ -36,28 +36,24 @@ class ApplicationController < Sinatra::Base
 
   get "/login" do
       @session = session
+      @invalid = true if params["invalid"]
       session[:user_id] = 0
       erb :login
   end
 
   post "/login" do
-    user = User.find_by(username: params[:username]).authenticate(params[:password])
-    if user
+    user = User.find_by(username: params[:username])
+    if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect to '/home'
     else
-      redirect to '/failure'
+      redirect to '/login?invalid=true'
     end
   end
 
   get "/logout" do
     session.clear
     redirect "/login"
-  end
-
-  get "/failure" do
-    @failed_auth = true 
-    erb :login
   end
 
   get "/home" do
@@ -67,7 +63,7 @@ class ApplicationController < Sinatra::Base
     @friendships = Friendship.all
     @self = Helpers.user(session)
     @users = User.all
-    erb :index
+    erb :home
   end
 
   helpers do

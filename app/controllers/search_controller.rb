@@ -46,13 +46,15 @@ class SearchController < ApplicationController
 
     get '/restaurants/search/show' do
         protected!
-
-        @error = true if params[:failure] == "true"
+        @error = true if params["failure"] == "true"
         @res = Restaurant.all.find{|i| i.res_id == params["res"]["res_id"]}
         user = Helpers.user(session)
-        @reviews = UserRestaurant.all.map{|i| i if i.restaurant_id == @res.id && !i.review.nil?}.compact
         @progress = "100"
         @restaurant = Api.fetch(Search.linkify(params["res"]))
+        @reviews = []
+        if @res
+            @reviews = UserRestaurant.all.map{|i| i if i.restaurant_id == @res.id && !i.review.nil?}.compact
+        end
         if !user.restaurants.include?(@res)
             @button = ["btn-success","Add to my DishList"]
         else
@@ -61,14 +63,16 @@ class SearchController < ApplicationController
         erb :'/restaurants/search/show'
     end
 
-    post '/restaurants/search/review' do 
-        res = Restaurant.find(params[:res_id])
-        user_restaurant = UserRestaurant.find_by("user_id" => session[:user_id], "restaurant_id" => res.id)
+    post '/restaurants/search/review' do
+        res = Restaurant.find_by("res_id" => params["res"]["res_id"])
+        if res
+            user_restaurant = UserRestaurant.all.find{|i| i["user_id"] == session[:user_id] && i["restaurant_id"] == res.id}
+        end
         if !user_restaurant.nil?
             user_restaurant.review = params[:review]
             user_restaurant.save
         else
-            redirect "/restaurants/search/show?res[res_id]=#{res.res_id}&failure=true"
+            redirect "/restaurants/search/show?res[res_id]=#{params["res"]["res_id"]}&failure=true"
         end
         redirect "/restaurants/search/show?res[res_id]=#{res.res_id}"
     end
